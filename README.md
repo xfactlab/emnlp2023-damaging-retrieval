@@ -1,6 +1,12 @@
 This repository contains code for damaging retrieval in open-domain question answering
 
 # Data
+
+## Download the dataset from the link
+- Link : 
+
+
+
 ## Simulating Damaging Passages in QA 
 #### Random Sampling
 - Data : 2539 instances in NQ-dev set
