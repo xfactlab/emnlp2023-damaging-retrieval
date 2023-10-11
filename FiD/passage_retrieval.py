@@ -173,7 +173,7 @@ if __name__ == '__main__':
     parser.add_argument('--passages', type=str, default=None, help='Path to passages (.tsv file)')
     parser.add_argument('--passages_embeddings', type=str, default=None, help='Glob path to encoded passages')
     parser.add_argument('--output_path', type=str, default=None, help='Results are written to output_path')
-    parser.add_argument('--n-docs', type=int, default=100, help="Number of documents to retrieve per questions")
+    parser.add_argument('--n-docs', type=int, default=100, help="Number of documents to retrieval per questions")
     parser.add_argument('--validation_workers', type=int, default=32,
                         help="Number of parallel processes to validate results")
     parser.add_argument('--per_gpu_batch_size', type=int, default=64, help="Batch size for question encoding")

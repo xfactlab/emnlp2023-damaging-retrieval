@@ -204,7 +204,7 @@ def constrained_beam_search(
         cross_attentions = () if (return_dict_in_generate and output_attentions) else None
         decoder_hidden_states = () if (return_dict_in_generate and output_hidden_states) else None
 
-        # if model is an encoder-decoder, retrieve encoder attention weights and hidden states
+        # if model is an encoder-decoder, retrieval encoder attention weights and hidden states
         if return_dict_in_generate and model.config.is_encoder_decoder:
             encoder_attentions = model_kwargs["encoder_outputs"].get("attentions") if output_attentions else None
             encoder_hidden_states = (

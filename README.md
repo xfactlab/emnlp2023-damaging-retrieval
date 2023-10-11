@@ -1,52 +1,64 @@
-This repository contains code for:
-- Fusion-in-Decoder models
-- Distilling Knowledge from Reader to Retriever
-
-## Dependencies
-
-- Python 3
-- [PyTorch](http://pytorch.org/) (currently tested on version 1.6.0)
-- [Transformers](http://huggingface.co/transformers/) (**version 3.0.2**, unlikely to work with a different version)
-- [NumPy](http://www.numpy.org/)
-
+This repository contains code for damaging retrieval in open-domain question answering
 
 # Data
+## Simulating Damaging Passages in QA 
+#### Random Sampling
+- Data : 2539 instances in NQ-dev set
+- For random sampling, we uniformly select 4 random passage over the Corpus and add 1 gold context
+- Path : `./data/simluation/random-sampling/random_dev_pos{i}.json`
+- `i` refers to the position of the gold context
 
-### Download data
-NaturalQuestions and TriviaQA data can be downloaded using [`get-data.sh`](get-data.sh). Both datasets are obtained from the original source and the wikipedia dump is downloaded from the [DPR](https://github.com/facebookresearch/DPR) repository. In addition to the question and answers, this script retrieves the Wikipedia passages used to trained the released pretrained models.
+#### Negative Sampling
+- Data : 2539 instances in NQ-dev set
+- For negative sampling, we use to select 4 passages with high BM25 scores but do not containing answers, and add 1 gold context
+- Path : `./data/simluation/negative-sampling/bm25_nq_dev_pos{i}.json`
+- `i` refers to the position of the gold context
 
-### Data format
+## Damaging Passages in Retrievers
+### Top-100 passages by retrievers 
+#### Natural Questions
+- DPR
+  - We use retrieved list on FiD repo
+  - Path : `./data/retrieval/NQ/dpr/{dev/test}.json`
+- SEAL 
+  - Run inference code available on SEAL repo  
+  - Path : `./data/retrieval/NQ/seal/{dev/test}.json`
+- Contriever 
+  - Run inference script available on Contriever repo
+  - Path : `./data/retrieval/NQ/contriever/{dev/test}.jsonl`
+#### TriviaQA
+- DPR 
+  - We use retrieved list on FiD repo 
+  - Path : `./data/retrieval/TQA/dpr/{dev/test}.json`
+- SEAL :
+  - Run inference code available on SEAL repo
+  - Path : `./data/retrieval/TQA/seal/{dev/test}.json`
+- Contriever
+  - Run inference script available on Contriever repo
+  - Path : `./data/retrieval/TQA/contriever/{dev/test}.jsonl`
+ 
+## Selection Inference (Probe3 with varying number of contexts)
 
-The expected data format is a list of entry examples, where each entry example is a dictionary containing
-- `id`: example id, optional
-- `question`: question text
-- `target`: answer used for model training, if not given, the target is randomly sampled from the 'answers' list
-- `answers`: list of answer text for evaluation, also used for training if target is not given
-- `ctxs`: a list of passages where each item is a dictionary containing
-        - `title`: article title
-        - `text`: passage text
+### NQ test
+- This Probe set is extracted from DPR-retrieved NQ test set.
+- Path : `./data/selection_infer/nq-test-dpr-probe3.json`
 
-Entry example:
-```
-{
-  'id': '0',
-  'question': 'What element did Marie Curie name after her native land?',
-  'target': 'Polonium',
-  'answers': ['Polonium', 'Po (chemical element)', 'Po'],
-  'ctxs': [
-            {
-                "title": "Marie Curie",
-                "text": "them on visits to Poland. She named the first chemical element that she discovered in 1898 \"polonium\", after her native country. Marie Curie died in 1934, aged 66, at a sanatorium in Sancellemoz (Haute-Savoie), France, of aplastic anemia from exposure to radiation in the course of her scientific research and in the course of her radiological work at field hospitals during World War I. Maria Sk\u0142odowska was born in Warsaw, in Congress Poland in the Russian Empire, on 7 November 1867, the fifth and youngest child of well-known teachers Bronis\u0142awa, \"n\u00e9e\" Boguska, and W\u0142adys\u0142aw Sk\u0142odowski. The elder siblings of Maria"
-            },
-            {
-                "title": "Marie Curie",
-                "text": "was present in such minute quantities that they would eventually have to process tons of the ore. In July 1898, Curie and her husband published a joint paper announcing the existence of an element which they named \"polonium\", in honour of her native Poland, which would for another twenty years remain partitioned among three empires (Russian, Austrian, and Prussian). On 26 December 1898, the Curies announced the existence of a second element, which they named \"radium\", from the Latin word for \"ray\". In the course of their research, they also coined the word \"radioactivity\". To prove their discoveries beyond any"
-            }
-          ]
-}
-```
+### TQA test
+- This Probe set is extracted from DPR-retrieved TQA test set.
+- Path : `./data/selection_infer/tqa-test-dpr-probe3.json`
 
-# Pretrained models.
+  
+# Reproducing Results
+
+## Simulating Damaging Passages in QA
+#### Inference
+
+### Damaging Passages in Retrievers
+
+### Creating Probes
+
+### Selection Inference on NQ test
+
 
 Pretrained models can be downloaded using [`get-model.sh`](get-model.sh). Currently availble models are [nq_reader_base, nq_reader_large, nq_retriever, tqa_reader_base, tqa_reader_large, tqa_retriever].
 
@@ -209,42 +221,25 @@ We found that iterating the four steps here can improve performances, depending 
 
 ## References
 
-[1] G. Izacard, E. Grave [*Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering*](https://arxiv.org/abs/2007.01282)
+[//]: # ([//]: # &#40;[1] G. Izacard, E. Grave [*Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering*]&#40;https://arxiv.org/abs/2007.01282&#41;&#41;)
+[//]: # ()
+[//]: # (```bibtex)
 
-```bibtex
-@misc{izacard2020leveraging,
-      title={Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering},
-      author={Gautier Izacard and Edouard Grave},
-      url = {https://arxiv.org/abs/2007.0128},
-      year={2020},
-      publisher = {arXiv},
-}
-```
+[//]: # (@inproceedings{)
 
-[2] G. Izacard, E. Grave [*Distilling Knowledge from Reader to Retriever for Question Answering*](https://arxiv.org/abs/2012.04584)
+[//]: # (anonymous2023is,)
 
-```bibtex
-@misc{izacard2020distilling,
-      title={Distilling Knowledge from Reader to Retriever for Question Answering},
-      author={Gautier Izacard and Edouard Grave},
-      url = {https://arxiv.org/abs/2012.04584},
-      year={2020},
-      publisher = {arXiv},
-}
-```
+[//]: # (title={Is too much context detrimental for open-domain question answering?},)
 
-[3] G. Izacard, F. Petroni, L. Hosseini, N. De Cao, S. Riedel, E. Grave [*A Memory Efficient Baseline for Open Domain Question Answering*](https://arxiv.org/abs/2012.15156)
+[//]: # (author={Anonymous},)
 
-```bibtex
-@misc{izacard2020memory,
-      title={A Memory Efficient Baseline for Open Domain Question Answering},
-      author={Gautier Izacard and Fabio Petroni and Lucas Hosseini and Nicola De Cao and Sebastian Riedel and Edouard Grave},
-      url = {https://arxiv.org/abs/2012.15156},
-      year={2020},
-      publisher = {arXiv},
-}
-```
+[//]: # (booktitle={The 2023 Conference on Empirical Methods in Natural Language Processing},)
 
-## License
+[//]: # (year={2023},)
 
-See the [LICENSE](LICENSE) file for more details.
+[//]: # (url={https://openreview.net/forum?id=HickNiCqk9})
+
+[//]: # (})
+
+[//]: # (```)
+

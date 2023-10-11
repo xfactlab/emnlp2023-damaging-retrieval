@@ -2,3 +2,4 @@ slurm-*
 jupyter_*/
 jupyter-*/
 .DS_Store
+.idea

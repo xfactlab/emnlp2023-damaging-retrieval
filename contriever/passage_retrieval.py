@@ -215,7 +215,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output_dir", type=str, default=None, help="Results are written to outputdir with data suffix"
     )
-    parser.add_argument("--n_docs", type=int, default=100, help="Number of documents to retrieve per questions")
+    parser.add_argument("--n_docs", type=int, default=100, help="Number of documents to retrieval per questions")
     parser.add_argument(
         "--validation_workers", type=int, default=32, help="Number of parallel processes to validate results"
     )
