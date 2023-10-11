@@ -84,7 +84,7 @@ python test_reader-slurm.py \
 ```
 
 ### 3. Selection Inference
-Selection Inference with varying number of the context sizes.
+Selection Inference on Probe3 with varying number of the context sizes (5, 10, 20, 40)
 
 ```shell
 cd FiD
