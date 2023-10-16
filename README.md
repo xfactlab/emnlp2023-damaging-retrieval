@@ -1,7 +1,11 @@
-This repository contains code for damaging retrieval in open-domain question answering
+# Damaging Retrieval  
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+This is the official repositoyr for "[Available Soon]()" by [Philhoon Oh](https://philhoonoh.github.io/) and [James Throne](https://jamesthorne.com/)
 
 # Data
-- Data can be downloaded from the link :  
+- Data can be downloaded from the link : https://drive.google.com/file/d/1uGUiUhiRc2bVWyKaRaBvlV-afN49e5iK/view?usp=drive_link 
 
 ## Data description
 ### 1. Simulating Damaging Passages in QA 
