@@ -111,21 +111,6 @@ python test_reader-slurm.py \
 ```
 
 
-
-
-## Paper Reference
-Please cite the following, if you find this work useful (current arxiv version)
-```bibtex
-@misc{oh2023detrimental,
-      title={Detrimental Contexts in Open-Domain Question Answering}, 
-      author={Philhoon Oh and James Thorne},
-      year={2023},
-      eprint={2310.18077},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-}
-```
-
 ## Main References
 Main reference papers for this work
 
@@ -181,3 +166,18 @@ Main reference papers for this work
 ````
 
 
+
+
+
+## Paper Reference
+Please cite the following, if you find this work useful (current arxiv version)
+```bibtex
+@misc{oh2023detrimental,
+      title={Detrimental Contexts in Open-Domain Question Answering}, 
+      author={Philhoon Oh and James Thorne},
+      year={2023},
+      eprint={2310.18077},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
