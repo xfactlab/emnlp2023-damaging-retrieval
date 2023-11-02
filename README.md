@@ -56,7 +56,7 @@ This is the official repository for "[Detrimental Contexts in Open-Domain Questi
 # Retrievers (DPR, SEAL, Contriever)
 Each retriever might be slightly different from the original implementation due to adjustments for local settings. Therefore, I recommend using the uploaded datasets
 
-# Reader (FiD_ 
+# Reader (FiD)
 ## Major modifications
 1. The original inference code was based on the slurm system, so `FiD/test_reader.py` has been adjusted for local inference settings
 2. Depending on the Probe pattern, the number of contexts can vary by instance. Therefore, in cases where the number of contexts used for inference is fewer than the top-N, we added mask tokens to compensate.
